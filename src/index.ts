@@ -4,7 +4,9 @@ import session from 'koa-session';
 import authRouter from './routes/auth';
 import userRouter from './routes/users';
 import 'dotenv/config';
+import pgConnect from './db.js';
 
+await pgConnect();
 
 const app = new Koa();
 const appRouter = new Router();
