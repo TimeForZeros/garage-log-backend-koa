@@ -6,17 +6,25 @@
   "scripts": {
     "start": "node dist/index",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "tsc",
+    "dev": "tsx --watch src/ src/index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.11.0",
   "dependencies": {
+    "dotenv": "^16.5.0",
     "koa": "^3.0.0",
     "koa-bodyparser": "^4.4.1",
     "koa-json": "^2.0.2",
     "koa-logger": "^3.2.1",
-    "koa-router": "^13.0.1"
+    "koa-router": "^13.0.1",
+    "koa-session": "^7.0.2",
+    "pg": "^8.16.0"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.15.0",
+    "@types/koa-router": "^7.4.8"
   }
 }
