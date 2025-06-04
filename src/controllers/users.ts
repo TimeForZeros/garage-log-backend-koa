@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { usersTable } from '../db/schema.js';
+import { usersTable } from '@/db/schema.js';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { eq } from 'drizzle-orm';
 import { argon2id, argon2Verify } from 'hash-wasm';

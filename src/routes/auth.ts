@@ -1,5 +1,5 @@
 import Router from 'koa-router';
-import { createUser } from '../controllers/users.js';
+import { createUser } from '@/controllers/users.js';
 
 const authRouter = new Router();
 

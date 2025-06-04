@@ -2,10 +2,10 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import bodyparser from 'koa-bodyparser';
 // import session from 'koa-session';
-import authRouter from './routes/auth.js';
-import userRouter from './routes/users.js';
+import authRouter from '@/routes/auth.js';
+import userRouter from '@/routes/users.js';
 import 'dotenv/config';
-import pgConnect from './db.js';
+import pgConnect from '@/db.js';
 import './db/index.js';
 
 await pgConnect();
