@@ -1,11 +1,22 @@
 import Router from 'koa-router';
 import { createUser } from '@/controllers/users.js';
+import jwt from 'jsonwebtoken';
+import { createHMAC, createSHA3, IDataType } from 'hash-wasm';
+import config from '@/config/index.js';
 
 const authRouter = new Router();
 
 authRouter.post('/logout', () => {});
-authRouter.post('/login', (ctx) => {
-  const loginData = ctx.request.body;
+authRouter.post('/login', async (ctx) => {
+  const hashFunc = createSHA3(256);
+  const loginData = ctx.request.body as IDataType;
+  const hmac = await createHMAC(hashFunc, config.secret);
+  hmac.init();
+  hmac.update('test');
+  const hmacData = hmac.digest();
+  const token = jwt.sign(loginData, hmacData, { algorithm: 'HS256', expiresIn: '1h' });
+  console.log(token);
+
   ctx.body = 'Affirmative';
 });
 authRouter.post('/signup', async (ctx) => {

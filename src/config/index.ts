@@ -7,6 +7,14 @@ export default {
   env,
   port: process.env.PORT,
   db: {
-    port: process.env.PGPORT,
+    postgres: {
+      port: process.env.PGPORT,
+      user: process.env.PGUSER,
+      password: process.env.PGPASS,
+      host: process.env.HOST,
+      name: process.env.PGDATABASE,
+    },
   },
+  pepper: process.env.PEPPER,
+  secret: process.env.SECRET as string,
 };
