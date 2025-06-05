@@ -5,11 +5,11 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "start": "node dist/index",
-    "prod": "NODE_ENV=PROD node dist/index",
+    "start": "NODE_ENV=dev node dist/index",
+    "prod": "NODE_ENV=prod node dist/index",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc && tsc-alias",
-    "dev": "NODE_ENV=DEV tsx watch src/index.ts",
+    "dev": "NODE_ENV=dev tsx watch src/index.ts",
     "lint": "eslint ."
   },
   "keywords": [],
@@ -49,6 +49,7 @@
     "prettier": "^3.5.3",
     "tsc-alias": "^1.8.16",
     "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
     "typescript-eslint": "^8.33.1"
   }
 }

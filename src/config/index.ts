@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 
-const env = process.env.NODE_ENV ?? 'default';
-dotenv.config({ path: `../../.env.${env}` });
+const env = process.env.NODE_ENV;
+dotenv.config({ path: `.env.${env || 'default'}` });
 
 export default {
   env,
