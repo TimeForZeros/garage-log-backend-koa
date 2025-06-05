@@ -5,11 +5,11 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "start": "NODE_ENV=dev node dist/index",
-    "prod": "NODE_ENV=prod node dist/index",
+    "start": "node --env-file=.env dist/index",
+    "prod": "node --env-file=.env.prod dist/index",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc && tsc-alias",
-    "dev": "NODE_ENV=dev tsx watch src/index.ts",
+    "dev": "tsx watch --env-file=.env src/index.ts",
     "lint": "eslint ."
   },
   "keywords": [],
@@ -17,7 +17,6 @@
   "license": "ISC",
   "packageManager": "pnpm@10.11.1",
   "dependencies": {
-    "dotenv": "^16.5.0",
     "drizzle-orm": "^0.44.1",
     "hash-wasm": "^4.12.0",
     "jsonwebtoken": "^9.0.2",

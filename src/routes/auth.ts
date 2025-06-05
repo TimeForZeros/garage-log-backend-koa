@@ -2,7 +2,7 @@ import Router from 'koa-router';
 import { createUser } from '@/controllers/users.js';
 import jwt from 'jsonwebtoken';
 import { createHMAC, createSHA3, IDataType } from 'hash-wasm';
-import config from '@/config/index.js';
+import config from '@/config.js';
 
 const authRouter = new Router();
 

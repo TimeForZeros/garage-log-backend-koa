@@ -3,11 +3,10 @@ import Router from 'koa-router';
 import bodyparser from 'koa-bodyparser';
 import authRouter from '@/routes/auth.js';
 import userRouter from '@/routes/users.js';
-import 'dotenv/config';
 import pgConnect from '@/db.js';
 import '@/db/index.js';
 import logger from '@/util/index.js';
-import config from '@/config/index.js';
+import config from '@config';
 
 console.log(config);
 
@@ -17,8 +16,6 @@ const app = new Koa();
 app.use(bodyparser());
 
 const appRouter = new Router();
-
-app.keys = [process.env.SESSION_KEY as string];
 
 app.use(authRouter.routes());
 app.use(async (ctx, next) => {

@@ -1,10 +1,10 @@
-import 'dotenv/config';
 import { usersTable } from '@/db/schema.js';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { eq } from 'drizzle-orm';
 import { argon2id, argon2Verify } from 'hash-wasm';
 import crypto from 'crypto';
 import { z } from 'zod/v4';
+import config from '@config';
 
 const ARGON2ID_CONFIG = {
   // OWASP recommended config
@@ -33,7 +33,7 @@ const LoginSchema = z.object({
 
 const SignupSchema = LoginSchema.extend({ name: z.string().min(2).max(255) });
 
-const db = drizzle(process.env.DATABASE_URL!);
+const db = drizzle(config.db.url!);
 
 const createUser = async (userData: any) => {
   const response: Record<string, any> = { status: 200 };
