@@ -6,9 +6,11 @@
   "type": "module",
   "scripts": {
     "start": "node dist/index",
+    "prod": "NODE_ENV=PROD node dist/index",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "dev": "NODE_ENV=DEV tsx --watch src/ src/index.ts"
+    "build": "tsc && tsc-alias",
+    "dev": "NODE_ENV=DEV tsx watch src/index.ts",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
@@ -23,7 +25,6 @@
     "koa-json": "^2.0.2",
     "koa-logger": "^3.2.1",
     "koa-router": "^13.0.1",
-    "koa-session": "^7.0.2",
     "pg": "^8.16.0",
     "winston": "^3.17.0",
     "zod": "^3.25.48"
@@ -44,6 +45,7 @@
     "eslint-plugin-prettier": "^5.4.1",
     "globals": "^16.2.0",
     "prettier": "^3.5.3",
+    "tsc-alias": "^1.8.16",
     "tsx": "^4.19.4",
     "typescript-eslint": "^8.33.1"
   }
