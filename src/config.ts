@@ -14,6 +14,4 @@ const config = {
   secret: process.env.SECRET as string,
 };
 
-console.log(config);
-
 export default config;

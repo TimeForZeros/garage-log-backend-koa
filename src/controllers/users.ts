@@ -1,59 +1,39 @@
 import { usersTable } from '@/db/schema.js';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { eq } from 'drizzle-orm';
-import { argon2id, argon2Verify } from 'hash-wasm';
-import crypto from 'crypto';
 import { z } from 'zod/v4';
 import config from '@config';
-
-const ARGON2ID_CONFIG = {
-  // OWASP recommended config
-  iterations: 2,
-  parallelism: 1,
-  memorySize: 1024 * 19, // 19 MiB
-  hashLength: 32,
-  outputType: 'encoded' as 'encoded',
-  secret: process.env.PEPPER,
-};
+import logger from '@/util/index.js';
+import { hashPassword } from '@/controllers/auth.js';
 
 const LoginSchema = z.object({
   email: z.email(),
-  password: z
-    .string()
-    .min(8)
-    .max(255)
-    .transform(async (pass) =>
-      argon2id({
-        ...ARGON2ID_CONFIG,
-        password: pass,
-        salt: crypto.randomBytes(16),
-      }),
-    ),
+  password: z.string().min(8).max(255).transform(hashPassword),
 });
 
 const SignupSchema = LoginSchema.extend({ name: z.string().min(2).max(255) });
 
 const db = drizzle(config.db.url!);
 
-const createUser = async (userData: any) => {
-  const response: Record<string, any> = { status: 200 };
+const createUser = async (userData: z.infer<typeof SignupSchema>) => {
   try {
     const user = await SignupSchema.parseAsync(userData);
     await db.insert(usersTable).values(user);
   } catch (err) {
     if (err instanceof z.ZodError) {
-      console.error('Invalid user data');
-      response.status = 400;
-      console.log(err.issues);
-      response.body = err.issues;
-    } else {
-      console.error(err);
-      response.status = 500;
-      response.body = 'An unknown error has occurred';
+      logger.warn('Invalid user data');
+      logger.info(err.issues);
+      return err.issues;
     }
+    throw err;
   }
-  return response;
+  return;
 };
 
-// const verify = await argon2Verify({ password: userData.password, hash: hashPassword, secret: process.env.PEPPER });
-export { createUser, LoginSchema, SignupSchema };
+const getUser = async (userData: z.infer<typeof SignupSchema>) => {
+  const user = await db.select().from(usersTable).where(eq(usersTable.email, userData.email));
+  logger.info(user);
+  return user;
+};
+
+export { createUser, getUser, LoginSchema, SignupSchema };
