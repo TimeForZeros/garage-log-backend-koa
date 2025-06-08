@@ -12,6 +12,7 @@ const config = {
     pepper: process.env.PEPPER,
   },
   secret: process.env.SECRET as string,
+  logLevel: process.env.LOG_LEVEL || 'info',
 };
 
 export default config;

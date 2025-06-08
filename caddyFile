@@ -1,0 +1,8 @@
+
+garage-log.localhost {
+  reverse_proxy localhost:5173
+}
+garage-log.localhost/api* {
+  reverse_proxy localhost:3000
+}
+

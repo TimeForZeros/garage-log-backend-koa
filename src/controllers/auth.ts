@@ -24,17 +24,4 @@ export const hashPassword = (password: string): Promise<string> =>
 export const authenticate = (password: string, hash: string) =>
   argon2Verify({ password, hash, secret: config.db.pepper });
 
-export const verify = (token: string) => {
-  try {
-    const payload = jwt.verify(token, 'fwiggle');
-    logger.info(payload);
-    if (payload) return payload;
-  } catch (err) {
-    if (err instanceof jwt.JsonWebTokenError) {
-      logger.warn(err.message);
-    } else {
-      logger.error(err);
-    }
-  }
-  return;
-};
+export const verify = (token: string) => jwt.verify(token, config.secret);

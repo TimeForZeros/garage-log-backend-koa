@@ -17,6 +17,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.11.1",
   "dependencies": {
+    "@koa/cors": "^5.0.0",
     "drizzle-orm": "^0.44.1",
     "hash-wasm": "^4.12.0",
     "jsonwebtoken": "^9.0.2",
@@ -36,6 +37,7 @@
     "@types/koa": "^2.15.0",
     "@types/koa-bodyparser": "^4.3.12",
     "@types/koa-router": "^7.4.8",
+    "@types/koa__cors": "^5.0.0",
     "@types/pg": "^8.15.4",
     "@typescript-eslint/eslint-plugin": "^8.33.1",
     "@typescript-eslint/parser": "^8.33.1",

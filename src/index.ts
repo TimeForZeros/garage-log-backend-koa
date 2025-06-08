@@ -7,37 +7,28 @@ import userRouter from '@/routes/users.js';
 // import '@/db/index.js';
 import logger from '@/util/index.js';
 import config from '@config';
+import cors from '@koa/cors';
 
-logger.info(`Environment: ${config.env}`);
+logger.debug(`Environment: ${config.env}`);
 
 const app = new Koa();
+app.use(
+  cors({
+    credentials: true,
+  }),
+);
+
 app.use(bodyparser());
 
-const appRouter = new Router();
-
-app.use(authRouter.routes());
-/*
-app.use(async (ctx, next) => {
-  await next();
-  const rt = ctx.response.get('X-Response-Time');
-  logger.info(`${ctx.method} ${ctx.url} - ${rt}`);
-});
-app.use(async (ctx, next) => {
-  const start = Date.now();
-  await next();
-  const ms = Date.now() - start;
-  ctx.set('X-Response-Time', `${ms}ms`);
-  logger.info(ms);
-});
-// */
+const appRouter = new Router({ prefix: '/api' });
+appRouter.use(authRouter.routes());
 // verify authentication middleware
-
 appRouter.use(authRouter.middleware());
 appRouter.get('/verify', (ctx) => {
-  logger.info('verify hit, after middleware');
-  ctx.status = 201;
+  ctx.status = 200;
+  ctx.body = 'hits';
 });
 appRouter.use('/user', userRouter.routes());
 app.use(appRouter.routes());
 
-app.listen(config.port, () => logger.info('Server Ready!'));
+app.listen(config.port, () => logger.debug('Server Ready!'));

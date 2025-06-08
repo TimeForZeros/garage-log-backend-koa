@@ -11,6 +11,9 @@ importers:
 
   .:
     dependencies:
+      '@koa/cors':
+        specifier: ^5.0.0
+        version: 5.0.0
       drizzle-orm:
         specifier: ^0.44.1
         version: 0.44.1(@types/pg@8.15.4)(pg@8.16.0)
@@ -63,6 +66,9 @@ importers:
       '@types/koa-router':
         specifier: ^7.4.8
         version: 7.4.8
+      '@types/koa__cors':
+        specifier: ^5.0.0
+        version: 5.0.0
       '@types/pg':
         specifier: ^8.15.4
         version: 8.15.4
@@ -353,6 +359,10 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
+  '@koa/cors@5.0.0':
+    resolution: {integrity: sha512-x/iUDjcS90W69PryLDIMgFyV21YLTnG9zOpPXS7Bkt2b8AsY3zZsIpOLBkYr9fBcF3HbkKaER5hOBZLfpLgYNw==}
+    engines: {node: '>= 14.0.0'}
+
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -428,6 +438,9 @@ packages:
 
   '@types/koa@2.15.0':
     resolution: {integrity: sha512-7QFsywoE5URbuVnG3loe03QXuGajrnotr3gQkXcEBShORai23MePfFYdhz90FEtBBpkyIYQbVD+evKtloCgX3g==}
+
+  '@types/koa__cors@5.0.0':
+    resolution: {integrity: sha512-LCk/n25Obq5qlernGOK/2LUwa/2YJb2lxHUkkvYFDOpLXlVI6tKcdfCHRBQnOY4LwH6el5WOLs6PD/a8Uzau6g==}
 
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
@@ -2367,6 +2380,10 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
+  '@koa/cors@5.0.0':
+    dependencies:
+      vary: 1.1.2
+
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -2461,6 +2478,10 @@ snapshots:
       '@types/keygrip': 1.0.6
       '@types/koa-compose': 3.2.8
       '@types/node': 22.15.29
+
+  '@types/koa__cors@5.0.0':
+    dependencies:
+      '@types/koa': 2.15.0
 
   '@types/mdast@4.0.4':
     dependencies:
